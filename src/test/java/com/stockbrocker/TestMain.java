@@ -135,5 +135,14 @@ public class TestMain {
 
         System.out.println("APPLE stock buy count: "+stockExchange.getBuyCount("APPLE"));
 
+        order1.setDematAccount(ranjeetDematAccount);
+        order1.setType(OrderType.BUY);
+        zerodha.buyStock(order1);
+
+        System.out.println("APPLE stock buy count: "+stockExchange.getBuyCount("APPLE"));
+
+        System.out.println("Shivam Wallet: "+shivamDematAccount.getWallet().getBalance());
+        System.out.println("Ranjeet Wallet: "+ranjeetDematAccount.getWallet().getBalance());
+
     }
 }

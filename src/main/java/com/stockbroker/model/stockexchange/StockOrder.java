@@ -33,9 +33,9 @@ public class StockOrder {
     }
 
     public ArrayList<ExchangeOrder> executeBuyOrder(ExchangeOrder order) {
-        if (sellCount == 0) {
+        if (getSellCount() == 0) {
             buyOrderQueue.addLast(order);
-            sellCount += order.getQuantity();
+            buyCount += order.getQuantity();
             return new ArrayList<>();
         }
         ArrayList<ExchangeOrder> resultList = new ArrayList<>();
@@ -70,9 +70,9 @@ public class StockOrder {
     }
 
     public ArrayList<ExchangeOrder> executeSellOrder(ExchangeOrder order) {
-        if (buyCount == 0) {
+        if (getBuyCount() == 0) {
             sellOrderQueue.addLast(order);
-            buyCount += order.getQuantity();
+            sellCount += order.getQuantity();
             return new ArrayList<>();
         }
         ArrayList<ExchangeOrder> resultList = new ArrayList<>();

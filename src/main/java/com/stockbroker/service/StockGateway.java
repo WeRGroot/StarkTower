@@ -74,7 +74,7 @@ public class StockGateway implements IStockGateway {
             throw new RuntimeException("Invalid order!!");
         }
         ExchangeOrder exchangeOrder = new ExchangeOrder(stockLot.getQuantity(), order.getDematAccount().getId(), order.getStockLot().getStock().getSymbol(), name, OrderType.SELL);
-        stockExchange.buyStock(exchangeOrder);
+        stockExchange.sellStock(exchangeOrder);
     }
 
 }

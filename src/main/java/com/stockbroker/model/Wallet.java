@@ -15,7 +15,7 @@ public class Wallet {
     }
 
     public void addMoney(double amount) {
-        System.out.println("Money "+amount+" deposited to wallet: "+id);
+        System.out.println("Money "+amount+" credited to wallet: "+id);
         balance += amount;
     }
 
@@ -24,6 +24,6 @@ public class Wallet {
             throw new RuntimeException("Insufficient balance");
         }
         balance -= amount;
-        System.out.println("Money "+amount+" deposited to wallet: "+id);
+        System.out.println("Money "+amount+" debited from wallet: "+id);
     }
 }
