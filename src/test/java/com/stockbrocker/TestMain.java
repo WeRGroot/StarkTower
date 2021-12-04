@@ -127,19 +127,17 @@ public class TestMain {
         System.out.println("Ranjeet PL: "+ranjeetDematAccount.getCurrentPL());
         System.out.println("Shivam PL: "+shivamDematAccount.getCurrentPL());
 
-        System.out.println("APPLE stock buy count: "+stockExchange.getBuyCount("APPLE"));
-
         order1.setType(OrderType.SELL);
         order1.setStockLot(new StockLot(appleStock, 10));
         zerodha.sellStock(order1);
 
-        System.out.println("APPLE stock buy count: "+stockExchange.getBuyCount("APPLE"));
+        System.out.println("APPLE stock buy count: "+stockExchange.getSellCount("APPLE"));
 
         order1.setDematAccount(ranjeetDematAccount);
         order1.setType(OrderType.BUY);
         zerodha.buyStock(order1);
 
-        System.out.println("APPLE stock buy count: "+stockExchange.getBuyCount("APPLE"));
+        System.out.println("APPLE stock buy count: "+stockExchange.getSellCount("APPLE"));
 
         System.out.println("Shivam Wallet: "+shivamDematAccount.getWallet().getBalance());
         System.out.println("Ranjeet Wallet: "+ranjeetDematAccount.getWallet().getBalance());

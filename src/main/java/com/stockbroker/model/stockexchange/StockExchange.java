@@ -58,7 +58,7 @@ public class StockExchange implements IStockExchange {
         if (!stockOrders.containsKey(symbol)) {
             throw new RuntimeException("Invalid stock symbol");
         }
-        return stockOrders.get(symbol).getBuyCount();
+        return stockOrders.get(symbol).getBuyOrderCount();
     }
 
     @Override
@@ -66,7 +66,7 @@ public class StockExchange implements IStockExchange {
         if (!stockOrders.containsKey(symbol)) {
             throw new RuntimeException("Invalid stock symbol");
         }
-        return stockOrders.get(symbol).getSellCount();
+        return stockOrders.get(symbol).getSellOrderCount();
     }
 
     @Override
@@ -95,7 +95,7 @@ public class StockExchange implements IStockExchange {
         }
 
         StockOrder stockOrder = stockOrders.get(symbol);
-        ArrayList<ExchangeOrder> executedOrderList = stockOrder.executeBuyOrder(exchangeOrder);
+        ArrayList<ExchangeOrder> executedOrderList = stockOrder.executeSellOrder(exchangeOrder);
         notifyStockGatewayForOrder(executedOrderList);
     }
 

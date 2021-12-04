@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
 @Setter
 public class StockOrder {
     private String symbol;
@@ -23,17 +22,17 @@ public class StockOrder {
     }
 
     // Number of shares available to buy
-    public long getBuyCount() {
-        return sellCount;
-    }
-
-    // Number of shares available to sell
-    public long getSellCount() {
+    public long getBuyOrderCount() {
         return buyCount;
     }
 
+    // Number of shares available to sell
+    public long getSellOrderCount() {
+        return sellCount;
+    }
+
     public ArrayList<ExchangeOrder> executeBuyOrder(ExchangeOrder order) {
-        if (getSellCount() == 0) {
+        if (sellCount == 0) {
             buyOrderQueue.addLast(order);
             buyCount += order.getQuantity();
             return new ArrayList<>();
@@ -70,7 +69,7 @@ public class StockOrder {
     }
 
     public ArrayList<ExchangeOrder> executeSellOrder(ExchangeOrder order) {
-        if (getBuyCount() == 0) {
+        if (buyCount == 0) {
             sellOrderQueue.addLast(order);
             sellCount += order.getQuantity();
             return new ArrayList<>();
