@@ -23,3 +23,15 @@
 hs_err_pid*
 /.gradle/
 /.idea/
+/build/reports/tests/test/css/base-style.css
+/build/reports/tests/test/packages/com.stockbrocker.html
+/build/reports/tests/test/classes/com.stockbrocker.TestMain.html
+/build/reports/tests/test/index.html
+/build/test-results/test/binary/output.bin
+/build/test-results/test/binary/output.bin.idx
+/build/tmp/compileJava/previous-compilation-data.bin
+/build/tmp/compileTestJava/previous-compilation-data.bin
+/build/reports/tests/test/js/report.js
+/build/test-results/test/binary/results.bin
+/build/reports/tests/test/css/style.css
+/build/test-results/test/TEST-com.stockbrocker.TestMain.xml
