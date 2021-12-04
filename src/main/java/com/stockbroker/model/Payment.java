@@ -6,9 +6,8 @@ import lombok.AllArgsConstructor;
 public abstract class Payment {
     private PaymentType type;
     private String id;
-    private double amount;
 
-    abstract void depositMoney(double amount, Wallet wallet);
+    public abstract void depositMoney(double amount, Wallet wallet);
 
-    abstract void withdrawMoney(double amount, Wallet wallet);
+    public abstract void withdrawMoney(double amount, Wallet wallet);
 }

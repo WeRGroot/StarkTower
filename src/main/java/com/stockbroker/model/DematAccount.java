@@ -1,6 +1,8 @@
 package com.stockbroker.model;
 
+import com.stockbroker.model.stockexchange.IStockGateway;
 import com.stockbroker.service.StockGateway;
+import java.util.UUID;
 import lombok.Getter;
 
 import java.util.HashMap;
@@ -17,6 +19,14 @@ public class DematAccount {
     @Getter
     private HashMap<String, Watchlist> watchlist;
 
+    public DematAccount(StockGateway stockGateway) {
+        this.stockGateway = stockGateway;
+        this.id = UUID.randomUUID().toString();
+        this.wallet = new Wallet();
+        this.stockHoldings = new HashMap<>();
+        this.watchlist = new HashMap<>();
+    }
+
     public double getCurrentPL() {
         double totalPL = 0;
         for (String symbol : stockHoldings.keySet()) {
@@ -32,7 +42,7 @@ public class DematAccount {
         return priceDiff * stockLot.getQuantity();
     }
 
-    public void executeBuy(com.stockbroker.model.Order order) {
+    public void executeBuy(Order order) {
         stockGateway.buyStock(order);
     }
 
@@ -46,6 +56,8 @@ public class DematAccount {
         StockLot currStockLot = stockHoldings.getOrDefault(symbol, new StockLot(newStock, 0));
         currStockLot.addQuantity(newStockLot.getQuantity());
         stockHoldings.put(symbol, currStockLot);
+
+        System.out.println("DematAccount: "+id+" Stock: "+ newStockLot.getStock().getSymbol() + " added of quantity: "+newStockLot.getQuantity());
     }
 
     public void removeStock(StockLot newStockLot) {
@@ -54,6 +66,7 @@ public class DematAccount {
         StockLot currStockLot = stockHoldings.getOrDefault(symbol, new StockLot(newStock, 0));
         currStockLot.removeQuantity(newStockLot.getQuantity());
         stockHoldings.put(symbol, currStockLot);
+        System.out.println("DematAccount: "+id+" Stock: "+ newStockLot.getStock().getSymbol() + " removed of quantity: "+newStockLot.getQuantity());
     }
 
     public void deleteWatchList(String name) {

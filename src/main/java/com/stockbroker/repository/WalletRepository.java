@@ -1,5 +1,6 @@
 package com.stockbroker.repository;
 
+import com.stockbroker.model.DematAccount;
 import com.stockbroker.model.Wallet;
 
 import java.util.HashMap;

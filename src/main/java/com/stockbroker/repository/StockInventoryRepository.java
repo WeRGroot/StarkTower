@@ -32,4 +32,8 @@ public class StockInventoryRepository {
         }
         stockInventory.get(symbol).setCurrPrice(price);
     }
+
+    public Stock getStock(String symbol){
+        return stockInventory.get(symbol);
+    }
 }

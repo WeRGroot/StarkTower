@@ -1,5 +1,6 @@
 package com.stockbroker.model;
 
+import java.util.UUID;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +16,7 @@ public class User {
     private String phone;
 
     public User() {
+        this.id = UUID.randomUUID().toString();
         accountList = new HashSet<>();
     }
 

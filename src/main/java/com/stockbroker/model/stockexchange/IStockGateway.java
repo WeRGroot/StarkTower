@@ -1,6 +1,7 @@
 package com.stockbroker.model.stockexchange;
 
 public interface IStockGateway {
-    void update(ExchangeOrder exchangeOrder);
+    void updateOrder(ExchangeOrder exchangeOrder);
     String getName();
+    void updatePrice(ExchangeStock exchangeStock);
 }

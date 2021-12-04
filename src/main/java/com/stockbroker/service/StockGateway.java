@@ -1,12 +1,15 @@
 package com.stockbroker.service;
 
+import com.stockbroker.model.DematAccount;
 import com.stockbroker.model.Order;
 import com.stockbroker.model.OrderType;
+import com.stockbroker.model.Stock;
 import com.stockbroker.model.StockLot;
 import com.stockbroker.model.stockexchange.ExchangeOrder;
 import com.stockbroker.model.stockexchange.ExchangeStock;
 import com.stockbroker.model.stockexchange.IStockExchange;
 import com.stockbroker.model.stockexchange.IStockGateway;
+import com.stockbroker.repository.DematAccountRepository;
 import com.stockbroker.repository.StockInventoryRepository;
 import lombok.AllArgsConstructor;
 
@@ -16,6 +19,8 @@ public class StockGateway implements IStockGateway {
 
     private String name;
     private IStockExchange stockExchange;
+
+    private DematAccountRepository dematAccountRepository = DematAccountRepository.getInstance();
     private StockInventoryRepository stockInventoryRepository;
 
     public StockGateway(String name, IStockExchange exchange) {
@@ -26,11 +31,23 @@ public class StockGateway implements IStockGateway {
 
     @Override
     public void updateOrder(ExchangeOrder exchangeOrder) {
+        DematAccount dematAccount = dematAccountRepository.getDematAccount(exchangeOrder.getDematAccountId());
+        StockLot stockLot = new StockLot(stockInventoryRepository.getStock(exchangeOrder.getSymbol()), exchangeOrder.getQuantity());
+
+        switch (exchangeOrder.getType()){
+            case BUY:
+                dematAccount.addStock(stockLot);
+                dematAccount.getWallet().removeMoney(stockLot.getAvgBuyPrice() * stockLot.getQuantity());
+                break;
+            case SELL:
+                dematAccount.removeStock(stockLot);
+                dematAccount.getWallet().addMoney(stockLot.getAvgBuyPrice() * stockLot.getQuantity());
+        }
     }
 
     @Override
     public String getName() {
-        return null;
+        return name;
     }
 
     @Override
